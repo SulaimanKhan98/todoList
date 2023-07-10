@@ -1,6 +1,7 @@
 import "./todoList.css"
 import React, { useState } from "react"
 import crossImg from "./remove.png"
+import editImg from "./edit-button.png"
 
 export const App = () => {
   const [inputList, setInputList] = useState("")
@@ -17,10 +18,16 @@ export const App = () => {
     setInputList("")
   }
 
+  const list = ["car", "road"]
+
+  const updateItem = (index) => {
+    console.log(items[index])
+  }
+
   const deleteItems = (index) => {
     setItems((oldItems) => {
       const updatedItems = [...oldItems]
-      updatedItems.splice(index, 1)
+      updatedItems.splice(index, 3)
       return updatedItems
     })
   }
@@ -43,15 +50,24 @@ export const App = () => {
             {items.map((itemValue, index) => {
               return (
                 <>
-                  <div className="listItem" key={index}>
-                    <img
-                      src={crossImg}
-                      className="crossImage"
-                      alt="Cross"
-                      onClick={() => deleteItems(index)}
-                    />
-                    <li>{itemValue}</li>
-                  </div>
+                  <li className="listItem" key={index}>
+                    <p>{itemValue}</p>
+
+                    <div className="images">
+                      <img
+                        src={crossImg}
+                        className="crossImage"
+                        alt="Cross"
+                        onClick={() => deleteItems(index)}
+                      />
+
+                      <img
+                        className="crossImage"
+                        src={editImg}
+                        onClick={() => updateItem(index)}
+                      />
+                    </div>
+                  </li>
                 </>
               )
             })}
